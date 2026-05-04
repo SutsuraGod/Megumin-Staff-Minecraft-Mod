@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"sutsura.megumin_staff.MeguminStaff"
+          "sutsura.megumin_staff.MeguminStaffMod"
 		],
 		"client": [
-			"sutsura.megumin_staff.client.MeguminStaffClient"
+			"sutsura.megumin_staff.client.MeguminStaffModClient"
 		]
 	},
 	"mixins": [

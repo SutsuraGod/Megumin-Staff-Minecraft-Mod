@@ -1,0 +1,10 @@
+{
+  "megumin_cast": {
+    "sounds": [
+      {
+        "name": "megumin-staff:megumin_cast",
+        "stream": true
+      }
+    ]
+  }
+}

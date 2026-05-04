@@ -3,7 +3,7 @@
 	"package": "sutsura.megumin_staff.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ExampleClientMixin"
+      "HeldItemRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

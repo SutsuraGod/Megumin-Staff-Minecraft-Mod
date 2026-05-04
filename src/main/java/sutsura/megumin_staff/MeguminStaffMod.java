@@ -4,8 +4,11 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sutsura.megumin_staff.item.ModItems;
+import sutsura.megumin_staff.particle.ModParticles;
+import sutsura.megumin_staff.sound.ModSounds;
 
-public class MeguminStaff implements ModInitializer {
+public class MeguminStaffMod implements ModInitializer {
 	public static final String MOD_ID = "megumin-staff";
 
 	// This logger is used to write text to the console and the log file.
@@ -15,10 +18,8 @@ public class MeguminStaff implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-
-		LOGGER.info("Hello Fabric world!");
+		ModItems.initialize();
+		ModParticles.initialize();
+		ModSounds.initialize();
 	}
 }
