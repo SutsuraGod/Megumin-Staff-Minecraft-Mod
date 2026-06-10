@@ -1,10 +1,12 @@
 package sutsura.megumin_staff;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sutsura.megumin_staff.item.ModItems;
+import sutsura.megumin_staff.item.staff.DelayedStaffExplosionManager;
 import sutsura.megumin_staff.particle.ModParticles;
 import sutsura.megumin_staff.sound.ModSounds;
 
@@ -21,5 +23,6 @@ public class MeguminStaffMod implements ModInitializer {
 		ModItems.initialize();
 		ModParticles.initialize();
 		ModSounds.initialize();
+		ServerTickEvents.END_SERVER_TICK.register(DelayedStaffExplosionManager::tick);
 	}
 }

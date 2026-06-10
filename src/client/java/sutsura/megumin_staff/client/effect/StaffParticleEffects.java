@@ -7,6 +7,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import sutsura.megumin_staff.particle.ModParticles;
 
@@ -31,6 +33,7 @@ public class StaffParticleEffects {
     private static final double VORTEX_TRAIL_LENGTH = 0.32D;
     private static final double MIN_PARTICLE_RADIUS = 1.4D;
     private static final double MAX_PARTICLE_RADIUS = 5.0D;
+    private static final double MAGIC_CIRCLE_LOOK_DISTANCE = 30.0D;
     private static final float[][] PARTICLE_COLORS = {
             rgb(255, 105, 180),
             rgb(186, 85, 211),
@@ -43,12 +46,17 @@ public class StaffParticleEffects {
     private final List<ActiveManaStream> activeManaStreams = new ArrayList<>();
     private final List<ActiveVortexStream> activeVortexStreams = new ArrayList<>();
 
-    public void reset() {
+    public void resetAll() {
         this.activeManaStreams.clear();
         this.activeVortexStreams.clear();
     }
 
-    public void tick(LocalPlayer player, float castProgress) {
+    public void resetCastEffects() {
+        this.activeManaStreams.clear();
+        this.activeVortexStreams.clear();
+    }
+
+    public void tickCast(LocalPlayer player, float castProgress) {
         spawnStaffParticles(player, castProgress);
         updateManaStreams(player);
         updateVortexStreams(player);
@@ -203,6 +211,17 @@ public class StaffParticleEffects {
                 Math.cos(phi) * radius,
                 Math.sin(theta) * sinPhi * radius
         );
+    }
+
+    public Vec3 getCastImpactPoint(LocalPlayer player) {
+        HitResult hitResult = player.pick(MAGIC_CIRCLE_LOOK_DISTANCE, 0.0F, false);
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+            return blockHitResult.getLocation();
+        }
+
+        Vec3 eyePosition = player.getEyePosition();
+        return eyePosition.add(player.getLookAngle().normalize().scale(MAGIC_CIRCLE_LOOK_DISTANCE));
     }
 
     private Vec3 getStaffCrystalTarget(LocalPlayer player) {

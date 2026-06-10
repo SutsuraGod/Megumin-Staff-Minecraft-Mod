@@ -6,5 +6,12 @@
         "stream": true
       }
     ]
+  },
+  "megumin_explosion": {
+    "sounds": [
+      {
+        "name": "megumin-staff:megumin_explosion"
+      }
+    ]
   }
 }
